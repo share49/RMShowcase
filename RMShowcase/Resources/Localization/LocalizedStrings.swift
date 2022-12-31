@@ -16,4 +16,5 @@ struct ls {
     static let unknownError = NSLocalizedString("unknown_error", comment: "")
     static let errorTitle = NSLocalizedString("error_title", comment: "")
     static let noInternetConnection = NSLocalizedString("no_internet_connection", comment: "")
+    static let noCharacters = NSLocalizedString("no_characters", comment: "")
 }

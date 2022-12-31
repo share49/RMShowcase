@@ -40,6 +40,11 @@
 		DB87BDE32960A2FE00D8103A /* QueryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87BDE22960A2FE00D8103A /* QueryRequest.swift */; };
 		DB87BDE62960A4CD00D8103A /* GraphQLRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87BDE52960A4CD00D8103A /* GraphQLRequest.swift */; };
 		DB87BDE82960B53A00D8103A /* EndpointTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87BDE72960B53A00D8103A /* EndpointTests.swift */; };
+		DB87BDED2960B8F900D8103A /* ContentLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87BDEC2960B8F900D8103A /* ContentLoadingView.swift */; };
+		DB87BDF02960B96200D8103A /* ListProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87BDEF2960B96200D8103A /* ListProgressView.swift */; };
+		DB87BDF22960B98800D8103A /* NoContentInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87BDF12960B98800D8103A /* NoContentInfoView.swift */; };
+		DB87BDF42960BB4500D8103A /* ContentLoadableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87BDF32960BB4500D8103A /* ContentLoadableView.swift */; };
+		DB87BDF92960C66D00D8103A /* NavigationControllerMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87BDF82960C66D00D8103A /* NavigationControllerMaker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +94,11 @@
 		DB87BDE22960A2FE00D8103A /* QueryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueryRequest.swift; sourceTree = "<group>"; };
 		DB87BDE52960A4CD00D8103A /* GraphQLRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphQLRequest.swift; sourceTree = "<group>"; };
 		DB87BDE72960B53A00D8103A /* EndpointTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointTests.swift; sourceTree = "<group>"; };
+		DB87BDEC2960B8F900D8103A /* ContentLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentLoadingView.swift; sourceTree = "<group>"; };
+		DB87BDEF2960B96200D8103A /* ListProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListProgressView.swift; sourceTree = "<group>"; };
+		DB87BDF12960B98800D8103A /* NoContentInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoContentInfoView.swift; sourceTree = "<group>"; };
+		DB87BDF32960BB4500D8103A /* ContentLoadableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentLoadableView.swift; sourceTree = "<group>"; };
+		DB87BDF82960C66D00D8103A /* NavigationControllerMaker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerMaker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,7 +175,8 @@
 				DB175CBA295E219600A5539B /* ViewModels */,
 				DB18B754295CCE5C00EE315D /* NetworkService */,
 				DB18B750295CBF7100EE315D /* Coordinator */,
-				DB7E5F1B295DA12D00309A2C /* Managers */,
+				DB7E5F1B295DA12D00309A2C /* Helpers */,
+				DB87BDF52960BB6A00D8103A /* Protocols */,
 				DB18B766295CD43B00EE315D /* Resources */,
 			);
 			path = RMShowcase;
@@ -192,9 +203,10 @@
 		DB18B751295CBF9600EE315D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DB87BDEB2960B8EA00D8103A /* ViewModifiers */,
+				DB87BDEE2960B90100D8103A /* Components */,
 				DB175CBD295E22D300A5539B /* Cells */,
 				DB18B74E295CBD6C00EE315D /* CharactersListView.swift */,
-				DB87BDD52960893B00D8103A /* AlertViewModifier.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -251,13 +263,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		DB7E5F1B295DA12D00309A2C /* Managers */ = {
+		DB7E5F1B295DA12D00309A2C /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				DB7E5F1E295DBC1C00309A2C /* CharactersLoader.swift */,
 				DB175CB1295DFFBB00A5539B /* ResponseErrorHelper.swift */,
+				DB87BDF82960C66D00D8103A /* NavigationControllerMaker.swift */,
 			);
-			path = Managers;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		DB87BDD4296088FC00D8103A /* Identifiables */ = {
@@ -301,6 +314,32 @@
 				DB87BDE22960A2FE00D8103A /* QueryRequest.swift */,
 			);
 			path = Requests;
+			sourceTree = "<group>";
+		};
+		DB87BDEB2960B8EA00D8103A /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+				DB87BDD52960893B00D8103A /* AlertViewModifier.swift */,
+			);
+			path = ViewModifiers;
+			sourceTree = "<group>";
+		};
+		DB87BDEE2960B90100D8103A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				DB87BDEC2960B8F900D8103A /* ContentLoadingView.swift */,
+				DB87BDEF2960B96200D8103A /* ListProgressView.swift */,
+				DB87BDF12960B98800D8103A /* NoContentInfoView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		DB87BDF52960BB6A00D8103A /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				DB87BDF32960BB4500D8103A /* ContentLoadableView.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -407,7 +446,9 @@
 				DB87BDE32960A2FE00D8103A /* QueryRequest.swift in Sources */,
 				DB175CAE295DFC2E00A5539B /* ErrorResponse.swift in Sources */,
 				DB18B75D295CD07E00EE315D /* InfoResponse.swift in Sources */,
+				DB87BDED2960B8F900D8103A /* ContentLoadingView.swift in Sources */,
 				DB18B753295CCE5600EE315D /* NetworkService.swift in Sources */,
+				DB87BDF22960B98800D8103A /* NoContentInfoView.swift in Sources */,
 				DB87BDD62960893B00D8103A /* AlertViewModifier.swift in Sources */,
 				DB7E5F1F295DBC1C00309A2C /* CharactersLoader.swift in Sources */,
 				DB87BDDD29609BAC00D8103A /* CharactersQueryResponse.swift in Sources */,
@@ -423,6 +464,8 @@
 				DB175CB0295DFDA600A5539B /* NetworkCache.swift in Sources */,
 				DB18B758295CCFCA00EE315D /* CharactersResponse.swift in Sources */,
 				DB175CB2295DFFBB00A5539B /* ResponseErrorHelper.swift in Sources */,
+				DB87BDF02960B96200D8103A /* ListProgressView.swift in Sources */,
+				DB87BDF42960BB4500D8103A /* ContentLoadableView.swift in Sources */,
 				DB87BDDA2960986D00D8103A /* ErrorInfoResponse.swift in Sources */,
 				DB175CBC295E22C700A5539B /* CharacterCell.swift in Sources */,
 				DB18B763295CD41600EE315D /* Endpoint.swift in Sources */,
@@ -430,6 +473,7 @@
 				DB18B756295CCE8000EE315D /* NetworkProvider.swift in Sources */,
 				DB175CB4295E01A600A5539B /* LocalizedStrings.swift in Sources */,
 				DB87BDE62960A4CD00D8103A /* GraphQLRequest.swift in Sources */,
+				DB87BDF92960C66D00D8103A /* NavigationControllerMaker.swift in Sources */,
 				DB18B765295CD43800EE315D /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

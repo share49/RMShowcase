@@ -22,4 +22,8 @@ struct Constants {
     struct NetworkCache {
         static let characters = "characters"
     }
+    
+    struct UI {
+        static let bigMargin: CGFloat = 24 // Apple's margin
+    }
 }

@@ -12,9 +12,11 @@ struct CharactersListView: View {
     @StateObject var viewModel: CharactersViewModel
     
     var body: some View {
-        List(viewModel.characters) { character in
-            CharacterCell(character: character)
-        }
+        ContentLoadingView({
+            List(viewModel.characters) { character in
+                CharacterCell(character: character)
+            }
+        }, noContentInfo: viewModel.noContentText, isLoading: viewModel.isLoading, hasContent: viewModel.hasItems)
         .navigationTitle(viewModel.title)
         .alertView(for: $viewModel.alertMessage)
         .task {

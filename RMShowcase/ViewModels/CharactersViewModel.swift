@@ -13,6 +13,8 @@ import Foundation
     
     private let charactersLoader: CharactersLoader
     @Published private(set) var characters = [Character]()
+    @Published private(set) var isLoading = false
+    @Published private(set) var hasItems = false
     @Published var alertMessage: AlertMessageInfo?
     
     // MARK: - Initializer
@@ -27,9 +29,20 @@ import Foundation
         ls.charactersTitle
     }
     
+    var noContentText: String {
+        ls.noCharacters
+    }
+    
     // MARK: - Methods
     
     func loadCharacters() async {
+        isLoading = true
+        
+        defer {
+            hasItems = !characters.isEmpty
+            isLoading = false
+        }
+        
         do {
             characters = try await charactersLoader.loadCharacters()
             
