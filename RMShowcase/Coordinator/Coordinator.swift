@@ -26,14 +26,12 @@ final class MainCoordinator: Coordinator {
     
     // MARK: - Flows
     
-    func start() {
-        let hostingController = UIHostingController(rootView: CharactersListView())
+    @MainActor func start() {
+        let networkService = NetworkService()
+        let charactersLoader = CharactersLoader(networkService: networkService)
+        let viewModel = CharactersViewModel(charactersLoader: charactersLoader)
+        
+        let hostingController = UIHostingController(rootView: CharactersListView(viewModel: viewModel))
         navigationController.pushViewController(hostingController, animated: false)
     }
 }
-
-#if DEBUG
-extension MainCoordinator {
-    static let mock = MainCoordinator(navigationController: UINavigationController())
-}
-#endif

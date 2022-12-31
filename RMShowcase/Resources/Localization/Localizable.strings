@@ -1,0 +1,14 @@
+/* 
+  Localizable.strings
+  RMShowcase
+
+  Created by Roger Pintó Diaz on 12/29/22.
+  
+*/
+
+"oops" = "Oops, something happened. Please try again.";
+"characters_title" = "Characters";
+"ok" = "Ok";
+"unknown_error" = "Unknown error";
+"error_title" = "Error";
+"no_internet_connection" = "The internet connection appears to be offline.";

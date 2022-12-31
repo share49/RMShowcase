@@ -4,6 +4,11 @@
 
 This showcase project gets the Rick and Morty characters from rickandmortyapi.com and shows a view with all the information of the selected character.
 
+## Technical considerations for scalability
+
+- I created Request as a middle layer to have flexibility to customize requests, either by adding headers or extra parameters.
+- Although ResponseErrorHelper only returns an error message, it's designed to be extensible to localize error messages, parse error codes, or provide additional information.
+
 ## Contributing
 
 ### Commit message structure

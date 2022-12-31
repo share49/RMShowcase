@@ -8,12 +8,12 @@
 import XCTest
 @testable import RMShowcase
 
-final class MainCoordinatorTests: XCTestCase {
+@MainActor final class MainCoordinatorTests: XCTestCase {
     
     func testCoordinatorStartCount() {
         // Arrange
         let expected = 1
-        let sut = MainCoordinator.mock
+        let sut = MainCoordinator(navigationController: UINavigationController())
         
         // Act
         sut.start()
@@ -26,7 +26,7 @@ final class MainCoordinatorTests: XCTestCase {
     func testCoordinatorStartsCharactersList() {
         // Arrange
         let expected = "UIHostingController<\(CharactersListView.self)>"
-        let sut = MainCoordinator.mock
+        let sut = MainCoordinator(navigationController: UINavigationController())
         
         // Act
         sut.start()
