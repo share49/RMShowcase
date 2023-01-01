@@ -10,11 +10,12 @@ import SwiftUI
 struct CharactersListView: View {
     
     @StateObject var viewModel: CharactersViewModel
+    let imageFetcher: ImageFetcher
     
     var body: some View {
         ContentLoadingView({
             List(viewModel.characters) { character in
-                CharacterCell(character: character)
+                CharacterCell(viewModel: CharacterCellViewModel(character: character, imageFetcher: imageFetcher))
             }
         }, noContentInfo: viewModel.noContentText, isLoading: viewModel.isLoading, hasContent: viewModel.hasItems)
         .navigationTitle(viewModel.title)
@@ -29,7 +30,7 @@ struct CharactersListView: View {
 struct CharactersListView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            CharactersListView(viewModel: CharactersViewModel.mock)
+            CharactersListView(viewModel: CharactersViewModel.mock, imageFetcher: ImageLoader())
         }
     }
 }

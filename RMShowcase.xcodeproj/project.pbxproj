@@ -48,6 +48,11 @@
 		DB87BDFB2960C88900D8103A /* CharactersViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87BDFA2960C88900D8103A /* CharactersViewModelTests.swift */; };
 		DB87BDFD2960CA6600D8103A /* MockNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87BDFC2960CA6600D8103A /* MockNetworkService.swift */; };
 		DB87BDFF2961A7E300D8103A /* NetworkProviderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87BDFE2961A7E300D8103A /* NetworkProviderError.swift */; };
+		DB87BE012961DB4500D8103A /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87BE002961DB4500D8103A /* ImageLoader.swift */; };
+		DB87BE032961F6F000D8103A /* RMLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87BE022961F6F000D8103A /* RMLogger.swift */; };
+		DB87BE052962067D00D8103A /* CharacterCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87BE042962067D00D8103A /* CharacterCellViewModel.swift */; };
+		DB87BE0729620F0900D8103A /* View+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87BE0629620F0900D8103A /* View+Ext.swift */; };
+		DB87BE0A2962146B00D8103A /* ImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87BE092962146B00D8103A /* ImageFetcher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -105,6 +110,11 @@
 		DB87BDFA2960C88900D8103A /* CharactersViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersViewModelTests.swift; sourceTree = "<group>"; };
 		DB87BDFC2960CA6600D8103A /* MockNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNetworkService.swift; sourceTree = "<group>"; };
 		DB87BDFE2961A7E300D8103A /* NetworkProviderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProviderError.swift; sourceTree = "<group>"; };
+		DB87BE002961DB4500D8103A /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		DB87BE022961F6F000D8103A /* RMLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RMLogger.swift; sourceTree = "<group>"; };
+		DB87BE042962067D00D8103A /* CharacterCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCellViewModel.swift; sourceTree = "<group>"; };
+		DB87BE0629620F0900D8103A /* View+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Ext.swift"; sourceTree = "<group>"; };
+		DB87BE092962146B00D8103A /* ImageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFetcher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				DB175CB8295E219200A5539B /* CharactersViewModel.swift */,
+				DB87BE042962067D00D8103A /* CharacterCellViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -183,6 +194,7 @@
 				DB18B750295CBF7100EE315D /* Coordinator */,
 				DB7E5F1B295DA12D00309A2C /* Helpers */,
 				DB87BDF52960BB6A00D8103A /* Protocols */,
+				DB87BE08296212ED00D8103A /* Extensions */,
 				DB18B766295CD43B00EE315D /* Resources */,
 			);
 			path = RMShowcase;
@@ -276,6 +288,8 @@
 			isa = PBXGroup;
 			children = (
 				DB7E5F1E295DBC1C00309A2C /* CharactersLoader.swift */,
+				DB87BE022961F6F000D8103A /* RMLogger.swift */,
+				DB87BE002961DB4500D8103A /* ImageLoader.swift */,
 				DB175CB1295DFFBB00A5539B /* ResponseErrorHelper.swift */,
 				DB87BDF82960C66D00D8103A /* NavigationControllerMaker.swift */,
 			);
@@ -347,8 +361,17 @@
 			isa = PBXGroup;
 			children = (
 				DB87BDF32960BB4500D8103A /* ContentLoadableView.swift */,
+				DB87BE092962146B00D8103A /* ImageFetcher.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		DB87BE08296212ED00D8103A /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DB87BE0629620F0900D8103A /* View+Ext.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -459,10 +482,13 @@
 				DB18B753295CCE5600EE315D /* NetworkService.swift in Sources */,
 				DB87BDF22960B98800D8103A /* NoContentInfoView.swift in Sources */,
 				DB87BDD62960893B00D8103A /* AlertViewModifier.swift in Sources */,
+				DB87BE052962067D00D8103A /* CharacterCellViewModel.swift in Sources */,
+				DB87BE012961DB4500D8103A /* ImageLoader.swift in Sources */,
 				DB7E5F1F295DBC1C00309A2C /* CharactersLoader.swift in Sources */,
 				DB87BDDD29609BAC00D8103A /* CharactersQueryResponse.swift in Sources */,
 				DB18B74D295CBCFE00EE315D /* Coordinator.swift in Sources */,
 				DB18B71D295CBBEF00EE315D /* AppDelegate.swift in Sources */,
+				DB87BE032961F6F000D8103A /* RMLogger.swift in Sources */,
 				DB87BDDF29609C0100D8103A /* QueryDataResponse.swift in Sources */,
 				DB18B74F295CBD6C00EE315D /* CharactersListView.swift in Sources */,
 				DB18B71F295CBBEF00EE315D /* SceneDelegate.swift in Sources */,
@@ -479,8 +505,10 @@
 				DB87BDDA2960986D00D8103A /* ErrorInfoResponse.swift in Sources */,
 				DB175CBC295E22C700A5539B /* CharacterCell.swift in Sources */,
 				DB18B763295CD41600EE315D /* Endpoint.swift in Sources */,
+				DB87BE0729620F0900D8103A /* View+Ext.swift in Sources */,
 				DB87BDD3296088F800D8103A /* AlertMessageInfo.swift in Sources */,
 				DB18B756295CCE8000EE315D /* NetworkProvider.swift in Sources */,
+				DB87BE0A2962146B00D8103A /* ImageFetcher.swift in Sources */,
 				DB175CB4295E01A600A5539B /* LocalizedStrings.swift in Sources */,
 				DB87BDE62960A4CD00D8103A /* GraphQLRequest.swift in Sources */,
 				DB87BDF92960C66D00D8103A /* NavigationControllerMaker.swift in Sources */,

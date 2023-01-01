@@ -30,8 +30,9 @@ final class MainCoordinator: Coordinator {
         let networkService = NetworkService()
         let charactersLoader = CharactersLoader(networkService: networkService)
         let viewModel = CharactersViewModel(charactersLoader: charactersLoader)
+        let imageLoader = ImageLoader()
         
-        let hostingController = UIHostingController(rootView: CharactersListView(viewModel: viewModel))
+        let hostingController = UIHostingController(rootView: CharactersListView(viewModel: viewModel, imageFetcher: imageLoader))
         navigationController.pushViewController(hostingController, animated: false)
     }
 }

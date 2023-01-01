@@ -20,7 +20,7 @@ struct Request {
                     {
                         characters {
                             info { next }
-                            results { id name }
+                            results { id name image status species gender }
                         }
                     }
                     """

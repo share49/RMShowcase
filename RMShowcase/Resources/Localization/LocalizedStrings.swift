@@ -17,4 +17,5 @@ struct ls {
     static let errorTitle = NSLocalizedString("error_title", comment: "")
     static let noInternetConnection = NSLocalizedString("no_internet_connection", comment: "")
     static let noCharacters = NSLocalizedString("no_characters", comment: "")
+    static let characterStatus = NSLocalizedString("character_status", comment: "")
 }

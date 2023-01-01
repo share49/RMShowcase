@@ -8,6 +8,7 @@ This showcase project gets the Rick and Morty characters from rickandmortyapi.co
 
 - I created Request as a middle layer to have flexibility to customize requests, either by adding headers or extra parameters.
 - Although ResponseErrorHelper only returns an error message, it's designed to be extensible to localize error messages, parse error codes, or provide additional information.
+- I use a View extension to set the text's font style in one place for easy maintenance and making changes.
 
 ## Contributing
 

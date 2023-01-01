@@ -13,6 +13,10 @@ struct Character: Identifiable {
     
     let id: String
     let name: String
+    let imageUrlString: String
+    let status: String
+    let species: String
+    let gender: String
 }
 
 extension Character {
@@ -20,6 +24,10 @@ extension Character {
     init(characterResponse: CharacterResponse) {
         id = characterResponse.id
         name = characterResponse.name
+        imageUrlString = characterResponse.imageUrlString
+        status = characterResponse.status
+        species = characterResponse.species
+        gender = characterResponse.gender
     }
 }
 
