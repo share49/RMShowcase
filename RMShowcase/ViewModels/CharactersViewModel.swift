@@ -12,8 +12,10 @@ import Foundation
     // MARK: - Properties
     
     private let charactersLoader: CharactersLoader
+    private var paginationCharacterId = ""
+    private var isLoading = false
     @Published private(set) var characters = [Character]()
-    @Published private(set) var isLoading = false
+    @Published private(set) var isFirstLoad = false
     @Published private(set) var hasItems = false
     @Published var alertMessage: AlertMessageInfo?
     
@@ -36,15 +38,18 @@ import Foundation
     // MARK: - Methods
     
     func loadCharacters() async {
+        isFirstLoad = !hasItems
         isLoading = true
         
         defer {
             hasItems = !characters.isEmpty
+            isFirstLoad = false
             isLoading = false
         }
         
         do {
             characters = try await charactersLoader.loadCharacters()
+            setPaginationCharacterId()
             
         } catch NetworkProviderError.noConnection {
             let message = NetworkProviderError.noConnection.message()
@@ -55,6 +60,27 @@ import Foundation
             
         } catch {
             alertMessage = AlertMessageInfo(title: ls.unknownError, description: ls.oops, dismissText: ls.ok)
+        }
+    }
+    
+    func loadMoreCharactersIfNeeded(currentCharacterId: String) async {
+        guard hasItems && !isLoading,
+              let paginationCharacterId = Int(paginationCharacterId),
+              let currentCharacterId = Int(currentCharacterId),
+              paginationCharacterId < currentCharacterId else {
+            
+            return
+        }
+        
+        await loadCharacters()
+    }
+    
+    // MARK: - Support methods
+    
+    private func setPaginationCharacterId() {
+        let paginationIndex = characters.endIndex - 5
+        if paginationIndex < characters.count && paginationIndex > 0 {
+            paginationCharacterId = characters[characters.endIndex - 5].id
         }
     }
 }

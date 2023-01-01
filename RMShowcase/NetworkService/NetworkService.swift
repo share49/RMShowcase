@@ -23,15 +23,15 @@ struct NetworkService: NetworkProvider {
     
     // MARK: - Characters
     
-    /// Gets the first 20 characters. Uses the cached response if it exists.
-    func getCharacters() async throws -> CharactersResponse {
-        let cacheId = Constants.NetworkCache.characters
+    /// Gets the 20 characters of the desired page number. Uses the cached response if it exists.
+    func getCharacters(forPageNumber pageNumber: Int) async throws -> CharactersResponse {
+        let cacheId = "\(Constants.NetworkCache.characters)\(pageNumber)"
         
         if let cachedData = cache[cacheId] {
             return try decodeDataWithErrorHandling(data: cachedData)
         }
         
-        let request = Request.characters()
+        let request = Request.characters(forPageNumber: pageNumber)
         let (data, _) = try await performRequest(request)
         let queryDataResponse: QueryDataResponse<CharactersQueryResponse> = try decodeDataWithErrorHandling(data: data, cacheKey: cacheId)
         return queryDataResponse.data.characters

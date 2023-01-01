@@ -55,7 +55,7 @@ import XCTest
         
         // Act
         await sut.loadCharacters()
-        let result = sut.isLoading
+        let result = sut.isFirstLoad
         
         // Assert
         XCTAssertEqual(result, expected)

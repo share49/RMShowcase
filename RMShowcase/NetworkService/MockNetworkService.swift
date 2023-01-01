@@ -26,7 +26,7 @@ struct MockNetworkService: NetworkProvider {
     
     // MARK: - NetworkProvider
     
-    func getCharacters() async throws -> CharactersResponse {
+    func getCharacters(forPageNumber pageNumber: Int) async throws -> CharactersResponse {
         switch result {
         case .success(let characters):
             return characters

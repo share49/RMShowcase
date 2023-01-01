@@ -13,21 +13,28 @@ final class CharactersLoader {
     
     private let networkService: NetworkProvider
     private var characters = [Character]()
+    private var pageNumber: Int?
     
     // MARK: - Initializer
     
-    init(networkService: NetworkProvider) {
+    init(networkService: NetworkProvider, initialPageNumber: Int = 1) {
         self.networkService = networkService
+        self.pageNumber = initialPageNumber
     }
     
     // MARK: - Methods
     
     func loadCharacters() async throws -> [Character] {
-        let charactersResponse = try await networkService.getCharacters()
+        guard let pageNumber = pageNumber else {
+            RMLogger.shared.debug("CharactersLoader: There aren't more pages")
+            return []
+        }
+        
+        let charactersResponse = try await networkService.getCharacters(forPageNumber: pageNumber)
+        self.pageNumber = charactersResponse.info.nextPageNumber
         
         let newCharacters = charactersResponse.results.map({ Character(characterResponse: $0) })
         characters.append(contentsOf: newCharacters)
-        
         return characters
     }
 }

@@ -15,10 +15,10 @@ struct Request {
     
     // MARK: - Requests
     
-    static func characters() -> URLRequest {
+    static func characters(forPageNumber pageNumber: Int) -> URLRequest {
         let query = """
                     {
-                        characters {
+                        characters(page: \(pageNumber)) {
                             info { next }
                             results { id name image status species gender }
                         }

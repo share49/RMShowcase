@@ -16,8 +16,13 @@ struct CharactersListView: View {
         ContentLoadingView({
             List(viewModel.characters) { character in
                 CharacterCell(viewModel: CharacterCellViewModel(character: character, imageFetcher: imageFetcher))
+                    .onAppear {
+                        Task(priority: .userInitiated) {
+                            await viewModel.loadMoreCharactersIfNeeded(currentCharacterId: character.id)
+                        }
+                    }
             }
-        }, noContentInfo: viewModel.noContentText, isLoading: viewModel.isLoading, hasContent: viewModel.hasItems)
+        }, noContentInfo: viewModel.noContentText, isLoading: viewModel.isFirstLoad, hasContent: viewModel.hasItems)
         .navigationTitle(viewModel.title)
         .alertView(for: $viewModel.alertMessage)
         .task {

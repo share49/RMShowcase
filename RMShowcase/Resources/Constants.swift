@@ -15,6 +15,7 @@ struct Constants {
         static let host = "rickandmortyapi.com"
         
         struct ErrorCodes {
+            static let cancelled = -999     // Task cancelled
             static let noConnection = -1009 // No network connection
         }
     }
