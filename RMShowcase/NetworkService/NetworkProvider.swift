@@ -7,11 +7,6 @@
 
 import Foundation
 
-enum NetworkProviderError: Error {
-    case errorResponse(message: String)
-    case noConnection
-}
-
 protocol NetworkProvider {
     
     // MARK: - Characters

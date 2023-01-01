@@ -21,3 +21,9 @@ struct CharactersResponse: Decodable {
         case results = "results"
     }
 }
+
+#if DEBUG
+extension CharactersResponse {
+    static let mock = CharactersResponse(info: InfoResponse.mock, results: [CharacterResponse.mock])
+}
+#endif

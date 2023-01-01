@@ -47,7 +47,8 @@ import Foundation
             characters = try await charactersLoader.loadCharacters()
             
         } catch NetworkProviderError.noConnection {
-            alertMessage = AlertMessageInfo(title: ls.errorTitle, description: ls.noInternetConnection, dismissText: ls.ok)
+            let message = NetworkProviderError.noConnection.message()
+            alertMessage = AlertMessageInfo(title: ls.errorTitle, description: message, dismissText: ls.ok)
             
         } catch NetworkProviderError.errorResponse(let message) {
             alertMessage = AlertMessageInfo(title: ls.errorTitle, description: message, dismissText: ls.ok)

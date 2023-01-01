@@ -19,3 +19,9 @@ struct InfoResponse: Decodable {
         case nextPageNumber = "next"
     }
 }
+
+#if DEBUG
+extension InfoResponse {
+    static let mock = InfoResponse(nextPageNumber: 2)
+}
+#endif

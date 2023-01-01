@@ -34,6 +34,6 @@ final class CharactersLoader {
 
 #if DEBUG
 extension CharactersLoader {
-    static let mock = CharactersLoader(networkService: NetworkService())
+    static let mock = CharactersLoader(networkService: MockNetworkService(result: .success(characters: CharactersResponse.mock)))
 }
 #endif
