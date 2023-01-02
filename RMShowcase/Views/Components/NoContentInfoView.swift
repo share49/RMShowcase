@@ -22,8 +22,10 @@ struct NoContentInfoView: View {
     }
 }
 
+#if DEBUG
 struct NoContentInfoView_Previews: PreviewProvider {
     static var previews: some View {
         NoContentInfoView(text: ls.noCharacters)
     }
 }
+#endif

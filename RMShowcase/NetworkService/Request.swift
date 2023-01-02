@@ -38,4 +38,13 @@ struct Request {
                     """
         return GraphQLRequest(query: query).request
     }
+    
+    static func character(by id: String) -> URLRequest {
+        let query = """
+                    {
+                        character(id: "\(id)") { id name image status species gender type location { name } }
+                    }
+                    """
+        return GraphQLRequest(query: query).request
+    }
 }

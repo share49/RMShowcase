@@ -14,7 +14,7 @@ final class CharactersLoaderTests: XCTestCase {
         // Arrange
         let infoResponse = InfoResponse(nextPageNumber: nil)
         let characters = CharactersResponse(info: infoResponse, results: [CharacterResponse.mock])
-        let mockNetworkService = MockNetworkService(result: .success(characters: characters))
+        let mockNetworkService = MockNetworkService(result: .success(item: characters))
         let sut = CharactersLoader(networkService: mockNetworkService, paginationManager: PaginationManager())
         
         // Act

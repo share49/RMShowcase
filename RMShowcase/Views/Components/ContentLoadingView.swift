@@ -30,6 +30,7 @@ struct ContentLoadingView<Content: View>: ContentLoadableView {
     }
 }
 
+#if DEBUG
 struct ContentLoadingView_Previews: PreviewProvider {
     static var previews: some View {
         let content = Color(.systemBlue)
@@ -50,3 +51,4 @@ struct ContentLoadingView_Previews: PreviewProvider {
         }
     }
 }
+#endif

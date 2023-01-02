@@ -53,6 +53,21 @@ struct NetworkService: NetworkProvider {
         return queryDataResponse.data.characters
     }
     
+    /// Gets the character for the specific id. Uses the cached response if it exists.
+    func character(by id: String) async throws -> DetailedCharacterResponse {
+        let cacheId = "\(Constants.NetworkCache.characters)_id_\(id)"
+        
+        if let cachedData = cache[cacheId] {
+            let queryDataResponse: QueryDataResponse<DetailedCharacterQueryResponse> = try decodeDataWithErrorHandling(data: cachedData)
+            return queryDataResponse.data.character
+        }
+        
+        let request = Request.character(by: id)
+        let (data, _) = try await performRequest(request)
+        let queryDataResponse: QueryDataResponse<DetailedCharacterQueryResponse> = try decodeDataWithErrorHandling(data: data, cacheKey: cacheId)
+        return queryDataResponse.data.character
+    }
+    
     // MARK: - Support methods
     
     /// Performs a request and handles if there is no network connection by throwing an error.

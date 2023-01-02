@@ -21,8 +21,10 @@ struct ListProgressView: View {
     }
 }
 
+#if DEBUG
 struct ListProgressView_Previews: PreviewProvider {
     static var previews: some View {
         ListProgressView()
     }
 }
+#endif

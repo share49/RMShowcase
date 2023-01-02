@@ -13,13 +13,18 @@ import UIKit
     
     private let character: Character
     private let imageFetcher: ImageFetcher
-    @Published private(set) var uiImage = UIImage(named: Constants.Image.avatarPlaceholder)!
+    @Published private(set) var uiImage: UIImage
     
     // MARK: - Initializer
     
-    init(character: Character, imageFetcher: ImageFetcher) {
+    init(
+        character: Character,
+        imageFetcher: ImageFetcher,
+        uiImage: UIImage = UIImage(named: Constants.Image.avatarPlaceholder)!
+    ) {
         self.character = character
         self.imageFetcher = imageFetcher
+        self.uiImage = uiImage
     }
     
     // MARK: - View data

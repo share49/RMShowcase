@@ -66,7 +66,7 @@ final class CharactersSearcher {
         let charactersResponse = try await networkService.searchCharacters(searchedText, pageNumber: pageNumber)
         self.pageNumber = charactersResponse.info.nextPageNumber
         
-        let newCharacters = charactersResponse.results.map({ Character(characterResponse: $0) })
+        let newCharacters = charactersResponse.results.map({ Character(withResponse: $0) })
         items.append(contentsOf: newCharacters)
         return items
     }
@@ -80,6 +80,6 @@ final class CharactersSearcher {
 
 #if DEBUG
 extension CharactersSearcher {
-    static let mock = CharactersSearcher(networkService: MockNetworkService(result: .success(characters: CharactersResponse.mock)), paginationManager: PaginationManager())
+    static let mock = CharactersSearcher(networkService: MockNetworkService(result: .success(item: CharactersResponse.mock)), paginationManager: PaginationManager())
 }
 #endif

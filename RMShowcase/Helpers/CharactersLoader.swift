@@ -40,7 +40,7 @@ final class CharactersLoader {
         let charactersResponse = try await networkService.getCharacters(forPageNumber: pageNumber)
         self.pageNumber = charactersResponse.info.nextPageNumber
         
-        let newCharacters = charactersResponse.results.map({ Character(characterResponse: $0) })
+        let newCharacters = charactersResponse.results.map({ Character(withResponse: $0) })
         items.append(contentsOf: newCharacters)
         return items
     }
@@ -54,6 +54,6 @@ final class CharactersLoader {
 
 #if DEBUG
 extension CharactersLoader {
-    static let mock = CharactersLoader(networkService: MockNetworkService(result: .success(characters: CharactersResponse.mock)), paginationManager: PaginationManager())
+    static let mock = CharactersLoader(networkService: MockNetworkService(result: .success(item: CharactersResponse.mock)), paginationManager: PaginationManager())
 }
 #endif

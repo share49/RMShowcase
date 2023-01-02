@@ -29,8 +29,11 @@ struct Constants {
         static let bigMargin: CGFloat = 24 // Apple's margin
         
         static let avatarCornerRadius: CGFloat = 10
+        static let containerCornerRadius: CGFloat = 20
         
         static let avatarHeight: CGFloat = 100
+        
+        static let containerLineWidth: CGFloat = 3
     }
     
     struct Image {

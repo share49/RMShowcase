@@ -34,7 +34,8 @@ final class MainCoordinator: Coordinator {
         let viewModel = CharactersViewModel(charactersLoader: charactersLoader, charactersSearcher: charactersSearcher)
         let imageLoader = ImageLoader()
         
-        let hostingController = UIHostingController(rootView: CharactersListView(viewModel: viewModel, imageFetcher: imageLoader))
+        let view = CharactersListView(viewModel: viewModel, networkService: networkService, imageFetcher: imageLoader)
+        let hostingController = UIHostingController(rootView: view)
         navigationController.pushViewController(hostingController, animated: false)
     }
 }

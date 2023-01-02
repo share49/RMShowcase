@@ -17,22 +17,37 @@ struct Character: Identifiable {
     let status: String
     let species: String
     let gender: String
+    let type: String?
+    let locationName: String?
 }
 
 extension Character {
     
-    init(characterResponse: CharacterResponse) {
-        id = characterResponse.id
-        name = characterResponse.name
-        imageUrlString = characterResponse.imageUrlString
-        status = characterResponse.status
-        species = characterResponse.species
-        gender = characterResponse.gender
+    init(withResponse response: CharacterResponse) {
+        id = response.id
+        name = response.name
+        imageUrlString = response.imageUrlString
+        status = response.status
+        species = response.species
+        gender = response.gender
+        type = nil
+        locationName = nil
+    }
+    
+    init(withResponse response: DetailedCharacterResponse) {
+        id = response.id
+        name = response.name
+        imageUrlString = response.imageUrlString
+        status = response.status
+        species = response.species
+        gender = response.gender
+        type = response.type
+        locationName = response.location.name
     }
 }
 
 #if DEBUG
 extension Character {
-    static let mock = Character(characterResponse: CharacterResponse.mock)
+    static let mock = Character(withResponse: CharacterResponse.mock)
 }
 #endif

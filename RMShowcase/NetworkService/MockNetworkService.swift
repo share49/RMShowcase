@@ -8,7 +8,7 @@
 import Foundation
 
 enum MockNetworkServiceResult {
-    case success(characters: CharactersResponse)
+    case success(item: Decodable)
     case failure(error: Error)
 }
 
@@ -29,7 +29,7 @@ struct MockNetworkService: NetworkProvider {
     func getCharacters(forPageNumber pageNumber: Int) async throws -> CharactersResponse {
         switch result {
         case .success(let characters):
-            return characters
+            return characters as! CharactersResponse
             
         case .failure(let error):
             throw error
@@ -39,7 +39,17 @@ struct MockNetworkService: NetworkProvider {
     func searchCharacters(_ searchedText: String, pageNumber: Int) async throws -> CharactersResponse {
         switch result {
         case .success(let characters):
-            return characters
+            return characters as! CharactersResponse
+            
+        case .failure(let error):
+            throw error
+        }
+    }
+    
+    func character(by id: String) async throws -> DetailedCharacterResponse {
+        switch result {
+        case .success(let character):
+            return character as! DetailedCharacterResponse
             
         case .failure(let error):
             throw error

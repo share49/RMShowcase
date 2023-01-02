@@ -19,4 +19,5 @@ struct ls {
     static let noCharacters = NSLocalizedString("no_characters", comment: "")
     static let characterStatus = NSLocalizedString("character_status", comment: "")
     static let characterSearchHint = NSLocalizedString("character_search_hint", comment: "")
+    static let unknown = NSLocalizedString("unknown", comment: "")
 }

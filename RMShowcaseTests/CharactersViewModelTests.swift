@@ -15,7 +15,7 @@ import XCTest
         let expected = false
         
         let characters = CharactersResponse.mock
-        let mockNetworkService = MockNetworkService(result: .success(characters: characters))
+        let mockNetworkService = MockNetworkService(result: .success(item: characters))
         let paginationManager = PaginationManager()
         let charactersLoader = CharactersLoader(networkService: mockNetworkService, paginationManager: paginationManager)
         let searcher = CharactersSearcher(networkService: mockNetworkService, paginationManager: paginationManager)
@@ -34,7 +34,7 @@ import XCTest
         let expected = true
         
         let characters = CharactersResponse.mock
-        let mockNetworkService = MockNetworkService(result: .success(characters: characters))
+        let mockNetworkService = MockNetworkService(result: .success(item: characters))
         let paginationManager = PaginationManager()
         let charactersLoader = CharactersLoader(networkService: mockNetworkService, paginationManager: paginationManager)
         let searcher = CharactersSearcher(networkService: mockNetworkService, paginationManager: paginationManager)
@@ -53,7 +53,7 @@ import XCTest
         let expected = false
         
         let characters = CharactersResponse.mock
-        let mockNetworkService = MockNetworkService(result: .success(characters: characters))
+        let mockNetworkService = MockNetworkService(result: .success(item: characters))
         let paginationManager = PaginationManager()
         let charactersLoader = CharactersLoader(networkService: mockNetworkService, paginationManager: paginationManager)
         let searcher = CharactersSearcher(networkService: mockNetworkService, paginationManager: paginationManager)
@@ -70,7 +70,7 @@ import XCTest
     func testLoadSuccessNotShowingAlert() async {
         // Arrange
         let characters = CharactersResponse.mock
-        let mockNetworkService = MockNetworkService(result: .success(characters: characters))
+        let mockNetworkService = MockNetworkService(result: .success(item: characters))
         let paginationManager = PaginationManager()
         let charactersLoader = CharactersLoader(networkService: mockNetworkService, paginationManager: paginationManager)
         let searcher = CharactersSearcher(networkService: mockNetworkService, paginationManager: paginationManager)
