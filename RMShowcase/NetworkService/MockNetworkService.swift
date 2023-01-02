@@ -16,7 +16,7 @@ struct MockNetworkService: NetworkProvider {
     
     // MARK: - Properties
     
-    private let result: MockNetworkServiceResult
+    private(set) var result: MockNetworkServiceResult
     
     // MARK: - Initializer
     
@@ -54,5 +54,11 @@ struct MockNetworkService: NetworkProvider {
         case .failure(let error):
             throw error
         }
+    }
+    
+    // MARK: - Helper methods
+    
+    mutating func updateResult(_ result: MockNetworkServiceResult) {
+        self.result = result
     }
 }

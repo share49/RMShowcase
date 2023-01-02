@@ -46,14 +46,10 @@ import UIKit
     func fetchImage() async {
         do {
             uiImage = try await imageFetcher.fetch(character.imageUrlString)
+        } catch let error as NSError where error.code == Constants.API.ErrorCodes.cancelled {
+            RMLogger.shared.debug("CharacterCellVM: \(error.localizedDescription)")
         } catch {
-            let localizedDescription = error.localizedDescription
-            
-            if (error as NSError).code == Constants.API.ErrorCodes.cancelled {
-                RMLogger.shared.debug("CharacterCellVM: \(localizedDescription)")
-            } else {
-                RMLogger.shared.error("CharacterCellVM: Can't fetch image. \(localizedDescription)")
-            }
+            RMLogger.shared.error("CharacterCellVM: Can't fetch image. \(error.localizedDescription)")
         }
     }
     

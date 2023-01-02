@@ -104,6 +104,7 @@ import Combine
             .store(in: &cancellables)
     }
     
+    /// Handles search. If the text is empty, it clears the searched characters. It also checks that the text has the required minimum length.
     private func handleSearchedText(_ searchedText: String) {
         guard !searchedText.isEmpty else {
             searchedCharacters.removeAll()
@@ -117,6 +118,8 @@ import Combine
         Task { await search(searchedText) }
     }
     
+    /// Searches text and if successful, it sets the searched characters. On failure, it shows an alert.
+    /// If it's a new search, displays a loading indicator while searching.
     private func search(_ searchedText: String) async {
         showLoadingView = !charactersSearcher.hasItems
         defer { showLoadingView = false }

@@ -7,6 +7,8 @@
 
 import UIKit
 
+/// Image fetcher with a task manager that avoids duplicated requests and provides task cancellation.
+/// On fetch success, it stores the image data in the file system.
 actor ImageLoader: ImageFetcher {
     
     // MARK: - Enums
