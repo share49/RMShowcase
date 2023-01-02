@@ -59,15 +59,8 @@ import UIKit
     // MARK: - Support methods
     
     private func fetchImage() async {
-        let imageUrl = character.imageUrlString
-        
-        guard let url = URL(string: imageUrl) else {
-            RMLogger.shared.error("CharacterDetailVM: Can't get URL for: \(imageUrl)")
-            return
-        }
-        
         do {
-            uiImage = try await imageFetcher.fetch(url)
+            uiImage = try await imageFetcher.fetch(character.imageUrlString)
         } catch {
             RMLogger.shared.error("CharacterDetailVM: Fetch image: \(error.localizedDescription)")
         }

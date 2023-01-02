@@ -29,6 +29,16 @@ actor ImageLoader: ImageFetcher {
     
     // MARK: - Methods
     
+    func fetch(_ urlString: String) async throws -> UIImage {
+        guard let url = URL(string: urlString) else {
+            RMLogger.shared.error("ImageLoader: Can't get URL for: \(urlString)")
+            throw ImageFetcherError.cantBuildUrl
+        }
+        
+        let request = URLRequest(url: url)
+        return try await fetch(request)
+    }
+    
     func fetch(_ url: URL) async throws -> UIImage {
         let request = URLRequest(url: url)
         return try await fetch(request)
@@ -71,7 +81,16 @@ actor ImageLoader: ImageFetcher {
         return image
     }
     
-    func cancelRequest(_ urlRequest: URLRequest) async {
+    func cancelFetch(_ urlString: String) async {
+        guard let url = URL(string: urlString) else {
+            RMLogger.shared.error("ImageLoader: Can't get URL for: \(urlString)")
+            return
+        }
+        
+        await cancelFetch(URLRequest(url: url))
+    }
+    
+    func cancelFetch(_ urlRequest: URLRequest) async {
         if case .inProgress(let task) = images[urlRequest] {
             task.cancel()
             images.removeValue(forKey: urlRequest)

@@ -44,13 +44,8 @@ import UIKit
     // MARK: - Methods
     
     func fetchImage() async {
-        guard let url = URL(string: character.imageUrlString) else {
-            RMLogger.shared.error("CharacterCellVM: Can't get URL for: \(character.imageUrlString)")
-            return
-        }
-        
         do {
-            uiImage = try await imageFetcher.fetch(url)
+            uiImage = try await imageFetcher.fetch(character.imageUrlString)
         } catch {
             let localizedDescription = error.localizedDescription
             
@@ -63,14 +58,7 @@ import UIKit
     }
     
     func cancelFetchImage() async {
-        guard let url = URL(string: character.imageUrlString) else {
-            RMLogger.shared.error("CharacterCellVM: Can't get URL for: \(character.imageUrlString)")
-            return
-        }
-        
-        let urlRequest = URLRequest(url: url)
-        
-        await imageFetcher.cancelRequest(urlRequest)
+        await imageFetcher.cancelFetch(character.imageUrlString)
     }
 }
 

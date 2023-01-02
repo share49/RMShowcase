@@ -40,6 +40,7 @@
 		DB3B600029634B4A00FD69B0 /* DetailedCharacterResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3B5FFF29634B4A00FD69B0 /* DetailedCharacterResponse.swift */; };
 		DB3B600229635B4D00FD69B0 /* CharacterInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3B600129635B4D00FD69B0 /* CharacterInfoView.swift */; };
 		DB3B600429635DCF00FD69B0 /* DetailedCharacterQueryResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3B600329635DCF00FD69B0 /* DetailedCharacterQueryResponse.swift */; };
+		DB3B60062963655E00FD69B0 /* CharacterCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3B60052963655E00FD69B0 /* CharacterCellViewModelTests.swift */; };
 		DB7E5F1F295DBC1C00309A2C /* CharactersLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7E5F1E295DBC1C00309A2C /* CharactersLoader.swift */; };
 		DB87BDD12960525F00D8103A /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87BDD02960525F00D8103A /* Character.swift */; };
 		DB87BDD3296088F800D8103A /* AlertMessageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB87BDD2296088F800D8103A /* AlertMessageInfo.swift */; };
@@ -113,6 +114,7 @@
 		DB3B5FFF29634B4A00FD69B0 /* DetailedCharacterResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedCharacterResponse.swift; sourceTree = "<group>"; };
 		DB3B600129635B4D00FD69B0 /* CharacterInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterInfoView.swift; sourceTree = "<group>"; };
 		DB3B600329635DCF00FD69B0 /* DetailedCharacterQueryResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedCharacterQueryResponse.swift; sourceTree = "<group>"; };
+		DB3B60052963655E00FD69B0 /* CharacterCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCellViewModelTests.swift; sourceTree = "<group>"; };
 		DB7E5F1E295DBC1C00309A2C /* CharactersLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersLoader.swift; sourceTree = "<group>"; };
 		DB87BDD02960525F00D8103A /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		DB87BDD2296088F800D8103A /* AlertMessageInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessageInfo.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 		DB18B732295CBBF100EE315D /* RMShowcaseTests */ = {
 			isa = PBXGroup;
 			children = (
+				DB3B60052963655E00FD69B0 /* CharacterCellViewModelTests.swift */,
 				DB3B5FF529632E0800FD69B0 /* PaginationManagerTests.swift */,
 				DB3B5FEF296312D200FD69B0 /* CharactersLoaderTests.swift */,
 				DB87BDFA2960C88900D8103A /* CharactersViewModelTests.swift */,
@@ -565,6 +568,7 @@
 			files = (
 				DB87BDFB2960C88900D8103A /* CharactersViewModelTests.swift in Sources */,
 				DB18B734295CBBF100EE315D /* MainCoordinatorTests.swift in Sources */,
+				DB3B60062963655E00FD69B0 /* CharacterCellViewModelTests.swift in Sources */,
 				DB3B5FF0296312D200FD69B0 /* CharactersLoaderTests.swift in Sources */,
 				DB87BDE82960B53A00D8103A /* EndpointTests.swift in Sources */,
 				DB87BDD82960967F00D8103A /* ResponseErrorHelperTests.swift in Sources */,
