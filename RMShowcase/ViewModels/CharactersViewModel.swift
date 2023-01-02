@@ -6,23 +6,41 @@
 //
 
 import Foundation
+import Combine
 
 @MainActor final class CharactersViewModel: ObservableObject {
     
     // MARK: - Properties
     
     private let charactersLoader: CharactersLoader
-    private var paginationCharacterId = ""
-    private var isLoading = false
-    @Published private(set) var characters = [Character]()
-    @Published private(set) var isFirstLoad = false
+    private let charactersSearcher: CharactersSearcher
+    
+    private var cancellables = Set<AnyCancellable>()
+    private var characters = [Character]()
+    private var searchedCharacters = [Character]() {
+        didSet {
+            hasItems = isSearching ? !searchedCharacters.isEmpty : !characters.isEmpty
+        }
+    }
+    private var isSearching: Bool {
+        !searchedText.isEmpty
+    }
+    var items: [Character] {
+        isSearching ? searchedCharacters : characters
+    }
+    
+    @Published private(set) var showLoadingView = false
     @Published private(set) var hasItems = false
     @Published var alertMessage: AlertMessageInfo?
+    @Published var searchedText = ""
     
     // MARK: - Initializer
     
-    init(charactersLoader: CharactersLoader) {
+    init(charactersLoader: CharactersLoader, charactersSearcher: CharactersSearcher) {
         self.charactersLoader = charactersLoader
+        self.charactersSearcher = charactersSearcher
+        
+        setupSearchBinding()
     }
     
     // MARK: - View data
@@ -35,21 +53,22 @@ import Foundation
         ls.noCharacters
     }
     
+    var searchHint: String {
+        ls.characterSearchHint
+    }
+    
     // MARK: - Methods
     
     func loadCharacters() async {
-        isFirstLoad = !hasItems
-        isLoading = true
+        showLoadingView = !hasItems
         
         defer {
             hasItems = !characters.isEmpty
-            isFirstLoad = false
-            isLoading = false
+            showLoadingView = false
         }
         
         do {
             characters = try await charactersLoader.loadCharacters()
-            setPaginationCharacterId()
             
         } catch NetworkProviderError.noConnection {
             let message = NetworkProviderError.noConnection.message()
@@ -63,30 +82,63 @@ import Foundation
         }
     }
     
-    func loadMoreCharactersIfNeeded(currentCharacterId: String) async {
-        guard hasItems && !isLoading,
-              let paginationCharacterId = Int(paginationCharacterId),
-              let currentCharacterId = Int(currentCharacterId),
-              paginationCharacterId < currentCharacterId else {
-            
-            return
+    func loadMoreCharactersIfNeeded(currentItemId: String) async {
+        if isSearching {
+            if charactersSearcher.shouldLoadMoreItems(currentItemId: currentItemId) {
+                handleSearchedText(searchedText)
+            }
+        } else {
+            if charactersLoader.shouldLoadMoreItems(currentItemId: currentItemId) {
+                await loadCharacters()
+            }
         }
-        
-        await loadCharacters()
     }
     
     // MARK: - Support methods
     
-    private func setPaginationCharacterId() {
-        let paginationIndex = characters.endIndex - 5
-        if paginationIndex < characters.count && paginationIndex > 0 {
-            paginationCharacterId = characters[characters.endIndex - 5].id
+    private func setupSearchBinding() {
+        $searchedText
+            .removeDuplicates()
+            .debounce(for: .seconds(charactersSearcher.debounceTime), scheduler: DispatchQueue.main)
+            .sink(receiveValue: { [weak self] in self?.handleSearchedText($0) })
+            .store(in: &cancellables)
+    }
+    
+    private func handleSearchedText(_ searchedText: String) {
+        guard !searchedText.isEmpty else {
+            searchedCharacters.removeAll()
+            return
+        }
+        
+        guard searchedText.count >= charactersSearcher.minimumCharactersToSearch else {
+            return
+        }
+        
+        Task { await search(searchedText) }
+    }
+    
+    private func search(_ searchedText: String) async {
+        showLoadingView = !charactersSearcher.hasItems
+        defer { showLoadingView = false }
+        
+        do {
+            searchedCharacters = try await charactersSearcher.search(searchedText)
+            
+        } catch NetworkProviderError.noConnection {
+            let message = NetworkProviderError.noConnection.message()
+            alertMessage = AlertMessageInfo(title: ls.errorTitle, description: message, dismissText: ls.ok)
+            
+        } catch NetworkProviderError.errorResponse(let message) {
+            alertMessage = AlertMessageInfo(title: ls.errorTitle, description: message, dismissText: ls.ok)
+            
+        } catch {
+            alertMessage = AlertMessageInfo(title: ls.unknownError, description: ls.oops, dismissText: ls.ok)
         }
     }
 }
 
 #if DEBUG
 extension CharactersViewModel {
-    static let mock = CharactersViewModel(charactersLoader: CharactersLoader.mock)
+    static let mock = CharactersViewModel(charactersLoader: CharactersLoader.mock, charactersSearcher: CharactersSearcher.mock)
 }
 #endif

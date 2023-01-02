@@ -36,4 +36,14 @@ struct Constants {
     struct Image {
         static let avatarPlaceholder = "logoSmall"
     }
+    
+    struct Logic {
+        static let initialPageNumber = 1
+        static let remainingItemsToStartPagination = 5
+        
+        struct Search {
+            static let debounceTime = 0.8
+            static let minimumCharactersToSearch = 2
+        }
+    }
 }

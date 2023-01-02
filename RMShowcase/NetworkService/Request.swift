@@ -26,4 +26,16 @@ struct Request {
                     """
         return GraphQLRequest(query: query).request
     }
+    
+    static func searchCharacters(_ searchedText: String, pageNumber: Int) -> URLRequest {
+        let query = """
+                    {
+                        characters(page: \(pageNumber), filter: { name: "\(searchedText)" }) {
+                            info { next }
+                            results { id name image status species gender }
+                        }
+                    }
+                    """
+        return GraphQLRequest(query: query).request
+    }
 }

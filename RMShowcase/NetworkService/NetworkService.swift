@@ -28,10 +28,26 @@ struct NetworkService: NetworkProvider {
         let cacheId = "\(Constants.NetworkCache.characters)\(pageNumber)"
         
         if let cachedData = cache[cacheId] {
-            return try decodeDataWithErrorHandling(data: cachedData)
+            let queryDataResponse: QueryDataResponse<CharactersQueryResponse> = try decodeDataWithErrorHandling(data: cachedData)
+            return queryDataResponse.data.characters
         }
         
         let request = Request.characters(forPageNumber: pageNumber)
+        let (data, _) = try await performRequest(request)
+        let queryDataResponse: QueryDataResponse<CharactersQueryResponse> = try decodeDataWithErrorHandling(data: data, cacheKey: cacheId)
+        return queryDataResponse.data.characters
+    }
+    
+    /// Search and get the 20 characters of the desired page number. Uses the cached response if it exists.
+    func searchCharacters(_ searchedText: String, pageNumber: Int) async throws -> CharactersResponse {
+        let cacheId = "\(Constants.NetworkCache.characters)_\(searchedText.lowercased())_\(pageNumber)"
+        
+        if let cachedData = cache[cacheId] {
+            let queryDataResponse: QueryDataResponse<CharactersQueryResponse> = try decodeDataWithErrorHandling(data: cachedData)
+            return queryDataResponse.data.characters
+        }
+        
+        let request = Request.searchCharacters(searchedText, pageNumber: pageNumber)
         let (data, _) = try await performRequest(request)
         let queryDataResponse: QueryDataResponse<CharactersQueryResponse> = try decodeDataWithErrorHandling(data: data, cacheKey: cacheId)
         return queryDataResponse.data.characters

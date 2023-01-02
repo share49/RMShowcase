@@ -12,4 +12,5 @@ protocol NetworkProvider {
     // MARK: - Characters
     
     func getCharacters(forPageNumber pageNumber: Int) async throws -> CharactersResponse
+    func searchCharacters(_ searchedText: String, pageNumber: Int) async throws -> CharactersResponse
 }

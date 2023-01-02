@@ -35,4 +35,14 @@ struct MockNetworkService: NetworkProvider {
             throw error
         }
     }
+    
+    func searchCharacters(_ searchedText: String, pageNumber: Int) async throws -> CharactersResponse {
+        switch result {
+        case .success(let characters):
+            return characters
+            
+        case .failure(let error):
+            throw error
+        }
+    }
 }

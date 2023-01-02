@@ -16,12 +16,14 @@ import XCTest
         
         let characters = CharactersResponse.mock
         let mockNetworkService = MockNetworkService(result: .success(characters: characters))
-        let charactersLoader = CharactersLoader(networkService: mockNetworkService)
-        let sut = CharactersViewModel(charactersLoader: charactersLoader)
+        let paginationManager = PaginationManager()
+        let charactersLoader = CharactersLoader(networkService: mockNetworkService, paginationManager: paginationManager)
+        let searcher = CharactersSearcher(networkService: mockNetworkService, paginationManager: paginationManager)
+        let sut = CharactersViewModel(charactersLoader: charactersLoader, charactersSearcher: searcher)
         
         // Act
         await sut.loadCharacters()
-        let result = sut.characters.isEmpty
+        let result = sut.items.isEmpty
         
         // Assert
         XCTAssertEqual(result, expected)
@@ -33,8 +35,10 @@ import XCTest
         
         let characters = CharactersResponse.mock
         let mockNetworkService = MockNetworkService(result: .success(characters: characters))
-        let charactersLoader = CharactersLoader(networkService: mockNetworkService)
-        let sut = CharactersViewModel(charactersLoader: charactersLoader)
+        let paginationManager = PaginationManager()
+        let charactersLoader = CharactersLoader(networkService: mockNetworkService, paginationManager: paginationManager)
+        let searcher = CharactersSearcher(networkService: mockNetworkService, paginationManager: paginationManager)
+        let sut = CharactersViewModel(charactersLoader: charactersLoader, charactersSearcher: searcher)
         
         // Act
         await sut.loadCharacters()
@@ -50,12 +54,14 @@ import XCTest
         
         let characters = CharactersResponse.mock
         let mockNetworkService = MockNetworkService(result: .success(characters: characters))
-        let charactersLoader = CharactersLoader(networkService: mockNetworkService)
-        let sut = CharactersViewModel(charactersLoader: charactersLoader)
+        let paginationManager = PaginationManager()
+        let charactersLoader = CharactersLoader(networkService: mockNetworkService, paginationManager: paginationManager)
+        let searcher = CharactersSearcher(networkService: mockNetworkService, paginationManager: paginationManager)
+        let sut = CharactersViewModel(charactersLoader: charactersLoader, charactersSearcher: searcher)
         
         // Act
         await sut.loadCharacters()
-        let result = sut.isFirstLoad
+        let result = sut.showLoadingView
         
         // Assert
         XCTAssertEqual(result, expected)
@@ -65,8 +71,10 @@ import XCTest
         // Arrange
         let characters = CharactersResponse.mock
         let mockNetworkService = MockNetworkService(result: .success(characters: characters))
-        let charactersLoader = CharactersLoader(networkService: mockNetworkService)
-        let sut = CharactersViewModel(charactersLoader: charactersLoader)
+        let paginationManager = PaginationManager()
+        let charactersLoader = CharactersLoader(networkService: mockNetworkService, paginationManager: paginationManager)
+        let searcher = CharactersSearcher(networkService: mockNetworkService, paginationManager: paginationManager)
+        let sut = CharactersViewModel(charactersLoader: charactersLoader, charactersSearcher: searcher)
         
         // Act
         await sut.loadCharacters()
@@ -82,8 +90,10 @@ import XCTest
         let expected = error.message()
         
         let mockNetworkService = MockNetworkService(result: .failure(error: error))
-        let charactersLoader = CharactersLoader(networkService: mockNetworkService)
-        let sut = CharactersViewModel(charactersLoader: charactersLoader)
+        let paginationManager = PaginationManager()
+        let charactersLoader = CharactersLoader(networkService: mockNetworkService, paginationManager: paginationManager)
+        let searcher = CharactersSearcher(networkService: mockNetworkService, paginationManager: paginationManager)
+        let sut = CharactersViewModel(charactersLoader: charactersLoader, charactersSearcher: searcher)
         
         // Act
         await sut.loadCharacters()
@@ -99,8 +109,10 @@ import XCTest
         let error = NetworkProviderError.errorResponse(message: expected)
         
         let mockNetworkService = MockNetworkService(result: .failure(error: error))
-        let charactersLoader = CharactersLoader(networkService: mockNetworkService)
-        let sut = CharactersViewModel(charactersLoader: charactersLoader)
+        let paginationManager = PaginationManager()
+        let charactersLoader = CharactersLoader(networkService: mockNetworkService, paginationManager: paginationManager)
+        let searcher = CharactersSearcher(networkService: mockNetworkService, paginationManager: paginationManager)
+        let sut = CharactersViewModel(charactersLoader: charactersLoader, charactersSearcher: searcher)
         
         // Act
         await sut.loadCharacters()
@@ -116,8 +128,10 @@ import XCTest
         
         let error = NSError()
         let mockNetworkService = MockNetworkService(result: .failure(error: error))
-        let charactersLoader = CharactersLoader(networkService: mockNetworkService)
-        let sut = CharactersViewModel(charactersLoader: charactersLoader)
+        let paginationManager = PaginationManager()
+        let charactersLoader = CharactersLoader(networkService: mockNetworkService, paginationManager: paginationManager)
+        let searcher = CharactersSearcher(networkService: mockNetworkService, paginationManager: paginationManager)
+        let sut = CharactersViewModel(charactersLoader: charactersLoader, charactersSearcher: searcher)
         
         // Act
         await sut.loadCharacters()

@@ -1,5 +1,5 @@
 //
-//  Coordinator.swift
+//  MainCoordinator.swift
 //  RMShowcase
 //
 //  Created by Roger Pintó Diaz on 12/28/22.
@@ -28,8 +28,10 @@ final class MainCoordinator: Coordinator {
     
     @MainActor func start() {
         let networkService = NetworkService()
-        let charactersLoader = CharactersLoader(networkService: networkService)
-        let viewModel = CharactersViewModel(charactersLoader: charactersLoader)
+        let paginationManager = PaginationManager()
+        let charactersLoader = CharactersLoader(networkService: networkService, paginationManager: paginationManager)
+        let charactersSearcher = CharactersSearcher(networkService: networkService, paginationManager: paginationManager)
+        let viewModel = CharactersViewModel(charactersLoader: charactersLoader, charactersSearcher: charactersSearcher)
         let imageLoader = ImageLoader()
         
         let hostingController = UIHostingController(rootView: CharactersListView(viewModel: viewModel, imageFetcher: imageLoader))

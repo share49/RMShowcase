@@ -14,15 +14,16 @@ struct CharactersListView: View {
     
     var body: some View {
         ContentLoadingView({
-            List(viewModel.characters) { character in
+            List(viewModel.items) { character in
                 CharacterCell(viewModel: CharacterCellViewModel(character: character, imageFetcher: imageFetcher))
                     .onAppear {
                         Task(priority: .userInitiated) {
-                            await viewModel.loadMoreCharactersIfNeeded(currentCharacterId: character.id)
+                            await viewModel.loadMoreCharactersIfNeeded(currentItemId: character.id)
                         }
                     }
             }
-        }, noContentInfo: viewModel.noContentText, isLoading: viewModel.isFirstLoad, hasContent: viewModel.hasItems)
+        }, noContentInfo: viewModel.noContentText, isLoading: viewModel.showLoadingView, hasContent: viewModel.hasItems)
+        .searchable(text: $viewModel.searchedText, prompt: viewModel.searchHint)
         .navigationTitle(viewModel.title)
         .alertView(for: $viewModel.alertMessage)
         .task {

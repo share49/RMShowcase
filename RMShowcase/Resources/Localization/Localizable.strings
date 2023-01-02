@@ -14,3 +14,4 @@
 "no_internet_connection" = "The internet connection appears to be offline.";
 "no_characters" = "There are no characters";
 "character_status" = "Status";
+"character_search_hint" = "Search any character";
